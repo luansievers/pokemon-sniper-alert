@@ -5,7 +5,10 @@
   "main": "sorteio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node push_notification.js"
+    "start_notification": "node push_notification.js",
+    "start_sorteio_1": "node sorteio.js MjM2ODYxNTUwNTIwOTU4OTc2.XK84EQ.-MGQ-2sL7q7jdTo_GJJcUt0FhxE",
+    "start_sorteio_2": "node sorteio.js MjczMDU1NjAxMDAzODU1ODcy.XKzsFg.0Pmla3AHQ-C-tP64P3gw6nI6fdc",
+    "start_sorteio_3": "node sorteio.js NTU5OTAwNzExMzgzNDY2MDA0.XK5koA.dtnsLWUDpZ14n_joVsehYLuOhm8"
   },
   "author": "",
   "license": "ISC",
