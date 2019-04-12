@@ -5,8 +5,7 @@
   "main": "sorteio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start_notification": "node push_notification.js",
-    "start_sorteio": "node sorteio.js"
+    "start": "node push_notification.js",
   },
   "author": "",
   "license": "ISC",
