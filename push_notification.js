@@ -64,6 +64,7 @@ request({
     json: true
 }, function (error, response, body) {
     wanted = body;
-    client.login('MjczMDU1NjAxMDAzODU1ODcy.XKzsFg.0Pmla3AHQ-C-tP64P3gw6nI6fdc');
+    console.log(process.env.API_KEY);
+    client.login(process.env.API_KEY);
 
 })
