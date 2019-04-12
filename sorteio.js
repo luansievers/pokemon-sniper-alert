@@ -46,4 +46,4 @@ function yourFunction () {
     }
 }
 
-client.login(process.argv[2]);
+client.login(process.env.API_KEY);
