@@ -3,7 +3,7 @@ const request = require("request")
 const PushBullet = require('pushbullet');
 
 const client = new Discord.Client();
-const pusher = new PushBullet('o.layyISk0FGq5U6VXJiNkmoqzZShmDdB8');
+const pusher = new PushBullet('o.4umSIw55pxFMlG0kYSTX4lmgs8Uz3Jkm');
 
 const idChannel = '259536527221063683'
 const idChannelPromo = '294605545464135690'
@@ -38,6 +38,15 @@ client.on('message', msg => {
                 console.log(mensagem)
                 console.log(`${nome} - ${info}`)
                 console.log(link)
+            });
+
+    } else if (msg.channel.id === idChannelPromo && msg.content.includes("Random Answer set")) {
+        pusher.note(
+            {},
+            "Random Answer set",
+            "",
+            function (error, response) {
+
             });
 
     } else if (msg.channel.id === idChannelPromo && msg.content.includes("GO GO GO!")) {
