@@ -7,7 +7,7 @@ const pusher = new PushBullet('o.layyISk0FGq5U6VXJiNkmoqzZShmDdB8');
 
 const idChannel = '259536527221063683'
 const idChannelPromo = '294605545464135690'
-const url = "https://api.myjson.com/bins/lll9k"
+const url = process.env.URL
 
 var wanted = []
 
