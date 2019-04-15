@@ -11,8 +11,7 @@ const CHAT_ID = '836091152'
 const client = new Discord.Client();
 const bot = new TelegramBot(TOKEN, { polling: true })
 
-var wanted = []
-
+var lista = require('./lista.json')
 
 
 client.on('ready', () => {
@@ -20,7 +19,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    if (msg.channel.id === ID_CHANNEL_NOTIFICATION && wanted.includes(msg.content.substr(msg.content.indexOf("<a:") + 3, 3))) {
+    if (msg.channel.id === ID_CHANNEL_NOTIFICATION && lista.includes(msg.content.substr(msg.content.indexOf("<a:") + 3, 3))) {
 
         var mensagem = msg.content.replace(/\s/g, '')
 
@@ -46,10 +45,4 @@ client.on('message', msg => {
 });
 
 
-request({
-    url: process.env.URL || 'https://api.myjson.com/bins/lll9k',
-    json: true
-}, function (error, response, body) {
-    wanted = body;
-    client.login(process.env.API_KEY || 'MjczMDU1NjAxMDAzODU1ODcy.XLDqRw.7pmo7cyGlhmj01K5uIyNDI8DcH0');
-})
+client.login(process.env.API_KEY || 'MjczMDU1NjAxMDAzODU1ODcy.XLDqRw.7pmo7cyGlhmj01K5uIyNDI8DcH0')
