@@ -1,79 +1,55 @@
 const Discord = require('discord.js');
 const request = require("request")
-const PushBullet = require('pushbullet');
+const TelegramBot = require(`node-telegram-bot-api`)
+
+
+const TOKEN = '720740691:AAHqaJ2HaBXiPKxtTKqOhNro8_LweqvOfDc'
+const ID_CHANNEL_NOTIFICATION = '259536527221063683'
+const ID_CHANNEL_PROMO = '294605545464135690'
+const CHAT_ID = '836091152'
 
 const client = new Discord.Client();
-const pusher = new PushBullet('o.4umSIw55pxFMlG0kYSTX4lmgs8Uz3Jkm');
-
-const idChannel = '259536527221063683'
-const idChannelPromo = '294605545464135690'
-const url = process.env.URL
+const bot = new TelegramBot(TOKEN, { polling: true })
 
 var wanted = []
 
-client.on('ready', () => {
-    console.log(`${new Date()} Logged in as ${client.user.tag}!`);
-        pusher.note(
-            {},
-            "Ready Notification",
-            "",
-            function (error, response) {
 
-            });
+
+client.on('ready', () => {
+    bot.sendMessage(CHAT_ID, `Logged in as ${client.user.tag}!`);
 });
 
 client.on('message', msg => {
-    if (msg.channel.id === idChannel && wanted.includes(msg.content.substr(msg.content.indexOf("<a:") + 3, 3))) {
-        var mensagem = msg.content.replace(/\s/g,'')
+    if (msg.channel.id === ID_CHANNEL_NOTIFICATION && wanted.includes(msg.content.substr(msg.content.indexOf("<a:") + 3, 3))) {
+
+        var mensagem = msg.content.replace(/\s/g, '')
+
         var nome = mensagem.substr(mensagem.indexOf(":**") + 3, mensagem.indexOf("**<a") - 11)
         var info = mensagem.substr(mensagem.indexOf("CP"), 6)
-        info = info.slice(0,info.indexOf("L"))
+        info = info.slice(0, info.indexOf("L"))
         var link = mensagem.substring(mensagem.indexOf("Community:<") + 11, mensagem.indexOf("Supportus") - 1)
-        pusher.link(
-            {},
-            `${nome} - ${info}`,
-            link,
-            "",
-            function(error, response) {
-                console.log(mensagem)
-                console.log(`${nome} - ${info}`)
-                console.log(link)
-            });
 
-    } else if (msg.channel.id === idChannelPromo && msg.content.includes("Random Answer set")) {
-        pusher.note(
-            {},
-            "Random Answer set",
-            "",
-            function (error, response) {
 
-            });
+        bot.sendMessage(CHAT_ID, `${nome} - ${info} \n ${link}`);
 
-    } else if (msg.channel.id === idChannelPromo && msg.content.includes("GO GO GO!")) {
-        pusher.note(
-            {},
-            "Giveaway started!!!!",
-            "",
-            function (error, response) {
+        console.log(mensagem)
+        console.log(`${nome} - ${info}`)
+        console.log(link)
 
-            });
-    } else if (msg.channel.id === idChannelPromo && msg.content.includes("Competition is finished, come back soon!")) {
-        pusher.note(
-            {},
-            "Giveaway ended!",
-            "",
-            function (error, response) {
-
-            });
+    } else if (msg.channel.id === ID_CHANNEL_PROMO && msg.content.includes("Random Answer set")) {
+        bot.sendMessage(CHAT_ID, `Random Answer set!`);
+    } else if (msg.channel.id === ID_CHANNEL_PROMO && msg.content.includes("GO GO GO!")) {
+        bot.sendMessage(CHAT_ID, `Giveaway started!`);
+    } else if (msg.channel.id === ID_CHANNEL_PROMO && msg.content.includes("Competition is finished, come back soon!")) {
+        bot.sendMessage(CHAT_ID, `Giveaway ended!`);
     }
 });
 
+
 request({
-    url: url,
+    url: process.env.URL || 'https://api.myjson.com/bins/lll9k',
     json: true
 }, function (error, response, body) {
     wanted = body;
-    console.log(process.env.API_KEY);
-    client.login(process.env.API_KEY);
-
+    client.login(process.env.API_KEY || 'MjczMDU1NjAxMDAzODU1ODcy.XLDqRw.7pmo7cyGlhmj01K5uIyNDI8DcH0');
 })
