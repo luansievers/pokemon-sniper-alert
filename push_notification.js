@@ -6,7 +6,6 @@ const Pokedex = require('pokedex-promise-v2')
 const TOKEN = '720740691:AAHqaJ2HaBXiPKxtTKqOhNro8_LweqvOfDc'
 const ID_CHANNEL_NOTIFICATION = '259536527221063683'
 const CHAT_ID = '836091152'
-const regex = /\d/gm
 
 const client = new Discord.Client();
 const bot = new TelegramBot(TOKEN, { polling: true })
@@ -23,8 +22,8 @@ client.on('message', msg => {
 
     if (msg.channel.id === ID_CHANNEL_NOTIFICATION) {
         var id = msg.content.substr(msg.content.indexOf("<a:") + 3, 3)
-        id = id.match( regex )
-
+        id = id.replace( /^\D+/g, '')
+        console.log(id)
         P.getPokemonSpeciesByName(id)
             .then(function (response) {
                 var idEvolutionChain = response.evolution_chain.url
