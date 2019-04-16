@@ -19,47 +19,49 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    var id = msg.content.substr(msg.content.indexOf("<a:") + 3, 3)
 
-    P.getPokemonSpeciesByName(265)
-    .then(function (response) {
-        var idEvolutionChain = response.evolution_chain.url
-        idEvolutionChain = idEvolutionChain.split('/')[6]
-        P.getEvolutionChainById(idEvolutionChain)
+    if (msg.channel.id === ID_CHANNEL_NOTIFICATION) {
+        var id = msg.content.substr(msg.content.indexOf("<a:") + 3, 3)
+
+        P.getPokemonSpeciesByName(id)
             .then(function (response) {
+                var idEvolutionChain = response.evolution_chain.url
+                idEvolutionChain = idEvolutionChain.split('/')[6]
+                P.getEvolutionChainById(idEvolutionChain)
+                    .then(function (response) {
 
-                var evolutionRootNode = response.chain
+                        var evolutionRootNode = response.chain
 
-                var pokemonEvolutionFamily = getAllEvolutions(evolutionRootNode)
-                var evolutionIds = getPokemonIds(pokemonEvolutionFamily)
-                
-                if (msg.channel.id === ID_CHANNEL_NOTIFICATION && lista.some(v => evolutionIds.includes(v))) {
+                        var pokemonEvolutionFamily = getAllEvolutions(evolutionRootNode)
+                        var evolutionIds = getPokemonIds(pokemonEvolutionFamily)
 
-                    var mensagem = msg.content.replace(/\s/g, '')
-            
-                    var nome = mensagem.substr(mensagem.indexOf(":**") + 3, mensagem.indexOf("**<a") - 11)
-                    var info = mensagem.substr(mensagem.indexOf("CP"), 6)
-                    info = info.slice(0, info.indexOf("L"))
-                    var link = mensagem.substring(mensagem.indexOf("Community:<") + 11, mensagem.indexOf("Supportus") - 1)
-            
-            
-                    bot.sendMessage(CHAT_ID, `${nome} - ${info} \n ${link}`);
-            
-                    console.log(mensagem)
-                    console.log(`${nome} - ${info}`)
-                    console.log(link)
-            
-                }
+                        if (lista.some(v => evolutionIds.includes(v))) {
 
+                            var mensagem = msg.content.replace(/\s/g, '')
+
+                            var nome = mensagem.substr(mensagem.indexOf(":**") + 3, mensagem.indexOf("**<a") - 11)
+                            var info = mensagem.substr(mensagem.indexOf("CP"), 6)
+                            info = info.slice(0, info.indexOf("L"))
+                            var link = mensagem.substring(mensagem.indexOf("Community:<") + 11, mensagem.indexOf("Supportus") - 1)
+
+
+                            bot.sendMessage(CHAT_ID, `${nome} - ${info} \n ${link}`);
+
+                            console.log(mensagem)
+                            console.log(`${nome} - ${info}`)
+                            console.log(link)
+
+                        }
+
+                    })
+                    .catch(function (error) {
+                        console.log('There was an ERROR: ', error);
+                    });
             })
             .catch(function (error) {
                 console.log('There was an ERROR: ', error);
             });
-    })
-    .catch(function (error) {
-        console.log('There was an ERROR: ', error);
-    });
-
+    }
 
 
 });
@@ -83,7 +85,8 @@ function getPokemonIds(urlArray) {
         urlArray[i] = urlArray[i].split('/');
     }
     for (var j = 0; j < urlArray.length; j++) {
-        intArray.push(parseInt(urlArray[j][urlArray[j].length - 2]));
+        var temp = (urlArray[j][urlArray[j].length - 2]) + ""
+        intArray.push(temp);
     }
     return intArray;
 }
