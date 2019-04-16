@@ -22,8 +22,7 @@ client.on('message', msg => {
 
     if (msg.channel.id === ID_CHANNEL_NOTIFICATION) {
         var id = msg.content.substr(msg.content.indexOf("<a:") + 3, 3)
-        id = id.replace( /^\D+/g, '')
-        console.log(id)
+        id = id.replace( ':', '')
         P.getPokemonSpeciesByName(id)
             .then(function (response) {
                 var idEvolutionChain = response.evolution_chain.url
@@ -43,7 +42,13 @@ client.on('message', msg => {
                             var nome = mensagem.substr(mensagem.indexOf(":**") + 3, mensagem.indexOf("**<a") - 11)
                             var info = mensagem.substr(mensagem.indexOf("CP"), 6)
                             info = info.slice(0, info.indexOf("L"))
-                            var link = mensagem.substring(mensagem.indexOf("Community:<") + 11, mensagem.indexOf("Supportus") - 1)
+                            var link = mensagem.substring(mensagem.indexOf("Community:") + 10, mensagem.indexOf("Supportus"))
+                            console.log(link)
+                            if(link.includes('http')){
+                                link = mensagem.substring(mensagem.indexOf("Community:<") + 11, mensagem.indexOf("Supportus") - 1)
+                            }else{
+                                link = 'ispoofer-pmgo://?location='+link
+                            }
 
 
                             bot.sendMessage(CHAT_ID, `${nome} - ${info} \n ${link}`);
@@ -96,5 +101,4 @@ function getPokemonIds(urlArray) {
 
 
 client.login(process.env.API_KEY || 'MjczMDU1NjAxMDAzODU1ODcy.XLDqRw.7pmo7cyGlhmj01K5uIyNDI8DcH0')
-
 
