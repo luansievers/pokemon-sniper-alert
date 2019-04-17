@@ -43,7 +43,6 @@ client.on('message', msg => {
                             var info = mensagem.substr(mensagem.indexOf("CP"), 6)
                             info = info.slice(0, info.indexOf("L"))
                             var link = mensagem.substring(mensagem.indexOf("Community:") + 10, mensagem.indexOf("Supportus"))
-                            console.log(link)
                             if(link.includes('http')){
                                 link = mensagem.substring(mensagem.indexOf("Community:<") + 11, mensagem.indexOf("Supportus") - 1)
                             }else{
