@@ -50,7 +50,7 @@ client.on('message', msg => {
                             }
 
 
-                            bot.sendMessage(CHAT_ID, `${nome} - ${info} \n ${link}`);
+                            bot.sendMessage(CHAT_ID, `${id}: ${nome} - ${info} \n ${link}`);
 
                             console.log(mensagem)
                             console.log(`${nome} - ${info}`)
