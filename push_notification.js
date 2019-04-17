@@ -40,7 +40,7 @@ client.on('message', msg => {
                             var mensagem = msg.content.replace(/\s/g, '')
 
                             var nome = mensagem.substr(mensagem.indexOf(":**") + 3, mensagem.indexOf("**<a") - 11)
-                            var info = mensagem.substr(mensagem.indexOf("CP"), 6)
+                            var info = mensagem.substr(mensagem.indexOf("CP"), 10)
                             info = info.slice(0, info.indexOf("L"))
                             var link = mensagem.substring(mensagem.indexOf("Community:") + 10, mensagem.indexOf("Supportus"))
                             if(link.includes('http')){
