@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "node-telegram-bot-api": "^0.30.0",
-    "pokedex-promise-v2": "^3.1.1"
+    "node-telegram-bot-api": "^0.30.0"
   }
 }
