@@ -48,7 +48,19 @@ client.on('message', msg => {
 
 client.login(process.env.API_KEY || 'MjczMDU1NjAxMDAzODU1ODcy.XLDqRw.7pmo7cyGlhmj01K5uIyNDI8DcH0')
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', function(err) {
     bot.sendMessage(CHAT_ID, 'Caught exception: ' + err);
     console.log('Caught exception: ' + err);
-});
+    if(cluster.isWorker) {
+        process.exit(1);
+    }
+    bot.stopPolling().then(() => {
+        cluster.fork();
+
+        cluster.on('exit', function(worker){
+            console.log('Worker ' + worker.id + ' died..');
+            cluster.fork();
+         });
+    })
+    
+  });
