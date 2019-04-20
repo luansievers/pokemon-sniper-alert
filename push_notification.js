@@ -18,7 +18,8 @@ client.on('ready', () => {
 client.on('message', msg => {
 
     if (msg.channel.id === ID_CHANNEL_NOTIFICATION) {
-        var id = msg.content.substr(msg.content.indexOf("<a:") + 3, 3)
+        var id = msg.content.substr(msg.content.indexOf("<a:") + 3, 5)
+        id = id.slice(0,id.indexOf(":"))
         id = id.replace(':', '')
 
         if (lista.includes(id)) {
