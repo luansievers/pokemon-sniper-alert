@@ -47,7 +47,7 @@ client.on('message', msg => {
 });
 
 
-client.login(process.env.API_KEY || 'MjczMDU1NjAxMDAzODU1ODcy.XLDqRw.7pmo7cyGlhmj01K5uIyNDI8DcH0')
+client.login(process.env.API_KEY)
 
 process.on('uncaughtException', function(err) {
     bot.sendMessage(CHAT_ID, 'Caught exception: ' + err);
