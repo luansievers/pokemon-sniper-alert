@@ -2,14 +2,15 @@
   "name": "node",
   "version": "1.0.0",
   "description": "",
-  "main": "push_notification.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node push_notification.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "discord.js": "^11.4.2",
     "node-telegram-bot-api": "^0.30.0"
   }

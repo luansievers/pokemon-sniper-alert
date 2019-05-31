@@ -22,7 +22,7 @@ client.on('message', msg => {
         id = id.slice(0,id.indexOf(":"))
         id = id.replace(':', '')
 
-        if (!lista.includes(id)) {
+        // if (!lista.includes(id)) {
 
             var mensagem = msg.content.replace(/\s/g, '')
 
@@ -42,7 +42,7 @@ client.on('message', msg => {
             console.log(mensagem)
             console.log(`${nome} - ${info}`)
             console.log(link)
-        }
+        // }
     }
 });
 
