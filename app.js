@@ -46,7 +46,7 @@ process.on('uncaughtException', function (err) {
 /**
  *  End Exceptions
  **/
-telegramClient.onText(/\/online/, () => {
+telegramClient.onText(/\/hey/, () => {
   send("Yas! I'm online");
 });
 
