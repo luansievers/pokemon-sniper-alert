@@ -3,3 +3,5 @@ steps:
   args: ['install']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'browse', '--project=pokemon-sniper-alert']
