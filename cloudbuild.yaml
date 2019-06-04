@@ -2,4 +2,11 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: [ 'app', 'deploy' ]
+  args:
+    - beta
+    - functions
+    - deploy
+    - helloWorld
+    - --source=.
+    - --runtime=nodejs8
+    - --trigger-http
