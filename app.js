@@ -10,6 +10,8 @@ const discordClient = new Discord.Client();
 const Telegram = require("node-telegram-bot-api");
 const telegramClient = new Telegram(TELEGRAM_API_KEY, { polling: true });
 
+const cluster = require('cluster');
+
 const listaPokemons = require("./lista.json");
 
 /**
